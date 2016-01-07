@@ -1,6 +1,6 @@
 # docker-fluentd-influxdb
 
-Docker image to ship docker logs from a host to InfluxDB
+Docker image to ship docker logs from a Docker host to InfluxDB
 
 Docker Environment Variables:
 - `INFLUXDB_DBNAME`: InfluxDB Database Name (default: fluentd)
