@@ -8,4 +8,4 @@ RUN fluent-gem install fluent-plugin-influxdb
 
 ADD fluent.conf /etc/fluent/
 
-ENTRYPOINT /usr/local/bin/fluentd -c /etc/fluent/fluent.conf -i'<match docker.all>\ntype influxdb\ndbname $INFLUXDB_DBNAME\nflush_interval 10s\nhost $INFLUXDB_HOST\nport $INFLUXDB_PORT\n</match>'
+ENTRYPOINT ["/usr/local/bin/fluentd", "-c", "/etc/fluent/fluent.conf", "-i", "'<match docker.all>\ntype influxdb\ndbname $INFLUXDB_DBNAME\nflush_interval 10s\nhost $INFLUXDB_HOST\nport $INFLUXDB_PORT\n</match>'"]
