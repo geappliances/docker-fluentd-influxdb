@@ -1,12 +1,9 @@
 # docker-fluentd-influxdb
 
-Docker image to ship docker logs from a Docker host to InfluxDB v0.8
+Docker image to ship docker logs using fluentd from a Docker host to InfluxDB v0.8
 
-Note: This image is using InfluxDB version 0.8 (currently deprecated)
+Notes:
+- This image is using InfluxDB version 0.8 (currently deprecated)
+- The fluentd configuration used to configure the InfluxDB plugin is passed to the docker container as additional arguments. Please take a look at the [InfluxDB Plugin for fluentd documentation](https://github.com/fangli/fluent-plugin-influxdb) for additional configuration options.
 
-Docker Environment Variables:
-- `INFLUXDB_DBNAME`: InfluxDB Database Name (default: fluentd)
-- `INFLUXDB_HOST`: InfluxDB Hostname (default: localhost)
-- `INFLUXDB_PORT`: InfluxDB Port (default: 8086)
-- `INFLUXDB_USER`: InfluxDB User
-- `INFLUXDB_PASS`: InfluxDB Password
+Example Usage: `docker run -d -v /var/lib/docker/containers:/var/lib/docker/containers --name=fluentd geappliances/docker-fluentd-influxdb:latest --inline-config '<match docker.logs>\ntype influxdb\ndbname fluentd\nuser username\npassword password\nflush_interval 10s\nhost 1.2.3.4\nport 8086\n</match>'`
